@@ -1,0 +1,52 @@
+/* src/pages/Evaluation.css */
+.evaluation-page {
+  padding: 2rem 0;
+  background: var(--light-gray);
+  min-height: 100vh;
+}
+
+.evaluation-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.evaluation-header h1 {
+  color: var(--primary-dark-red);
+  margin-bottom: 1rem;
+  font-size: 2rem;
+}
+
+.intro-text {
+  color: var(--text-light);
+  line-height: 1.8;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.evaluation-progress {
+  background: var(--white);
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+  box-shadow: var(--shadow);
+}
+
+.progress-bar {
+  background: var(--medium-gray);
+  height: 8px;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 0.5rem;
+}
+
+.progress-fill {
+  background: linear-gradient(90deg, var(--primary-red), var(--primary-dark-red));
+  height: 100%;
+  transition: width 0.3s ease;
+}
+
+.progress-text {
+  text-align: center;
+  color: var(--text-light);
+  font-size: 0.9rem;
+}

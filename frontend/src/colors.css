@@ -1,0 +1,11 @@
+/* colors.css */
+:root {
+  --primary-dark-red: #8B0000;
+  --primary-red: #B22222;
+  --light-gray: #F5F5F5;
+  --medium-gray: #E0E0E0;
+  --dark-gray: #616161;
+  --text-dark: #212121;
+  --text-light: #757575;
+  --white: #FFFFFF;
+}
