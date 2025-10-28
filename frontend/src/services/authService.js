@@ -1,5 +1,7 @@
 // src/services/authService.js
-const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
+
+// استفاده از URL ثابت - بعداً می‌توانید از فایل محیطی استفاده کنید
+const API_URL = 'http://localhost:5000/api';
 
 class AuthService {
   async login(phone, password) {

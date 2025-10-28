@@ -1,4 +1,3 @@
-// src/pages/Dashboard.jsx
 import React, { useState, useEffect, useContext } from 'react';
 import { EvaluationContext } from '../contexts/EvaluationContext';
 import { AuthContext } from '../contexts/AuthContext';
@@ -15,16 +14,16 @@ const Dashboard = () => {
     getUserEvaluations();
   }, []);
 
-  const filteredEvaluations = evaluations.filter(eval => {
+  const filteredEvaluations = evaluations.filter(evaluation => {
     if (activeTab === 'all') return true;
-    return eval.status === activeTab;
+    return evaluation.status === activeTab;
   });
 
   const stats = {
     total: evaluations.length,
-    completed: evaluations.filter(e => e.status === 'completed').length,
-    pending: evaluations.filter(e => e.status === 'pending').length,
-    under_review: evaluations.filter(e => e.status === 'under_review').length,
+    completed: evaluations.filter(evaluation => evaluation.status === 'completed').length,
+    pending: evaluations.filter(evaluation => evaluation.status === 'pending').length,
+    under_review: evaluations.filter(evaluation => evaluation.status === 'under_review').length,
   };
 
   if (loading) {

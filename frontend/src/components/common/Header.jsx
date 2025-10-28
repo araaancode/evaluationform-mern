@@ -12,11 +12,12 @@ const Header = () => {
   const location = useLocation();
 
   const slides = [
-    "Your future starts with informed decisions 🌍",
-    "Professional immigration consulting 💼",
-    "Three brands, one standard of excellence 🎯"
+    "سه برند، یک استاندارد کیفیت 🎯",
+    "آزمون لند - سامانه تخصصی آزمون و ارزیابی",
+    "فرامهاجرت - مشاوره تخصصی مهاجرت تحصیلی و کاری",
+    "خودجوش - پلتفرم توسعه فردی و مهارت‌آموزی"
   ];
-
+  
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentSlide(prev => (prev + 1) % slides.length);
@@ -53,8 +54,8 @@ const Header = () => {
         <div className="nav-container">
           {/* انتخاب برند */}
           <div className="brand-selector">
-            <select 
-              value={currentBrand} 
+            <select
+              value={currentBrand}
               onChange={(e) => handleBrandChange(e.target.value)}
               className="brand-select"
             >
@@ -74,7 +75,7 @@ const Header = () => {
             <Link to="/evaluation" className={`nav-link ${location.pathname === '/evaluation' ? 'active' : ''}`}>
               ارزیابی
             </Link>
-            
+
             {user ? (
               <>
                 <Link to="/dashboard" className={`nav-link ${location.pathname === '/dashboard' ? 'active' : ''}`}>

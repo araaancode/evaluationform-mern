@@ -1,4 +1,3 @@
-// src/contexts/AuthContext.js
 import React, { createContext, useState, useEffect } from 'react';
 import { authService } from '../services/authService';
 

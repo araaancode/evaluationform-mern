@@ -1,4 +1,3 @@
-// src/components/common/Footer.jsx
 import React, { useContext } from 'react';
 import { BrandContext } from '../../contexts/BrandContext';
 import './Footer.css';
@@ -6,6 +5,29 @@ import './Footer.css';
 const Footer = () => {
   const { currentBrand, brands } = useContext(BrandContext);
   const brand = brands.find(b => b.id === currentBrand);
+
+  const getBrandSocialLinks = (brandName) => {
+    const socials = {
+      'آزمون لند': {
+        instagram: 'https://instagram.com/azmoonland',
+        telegram: 'https://t.me/azmoonland',
+        website: 'https://azmoonland.ir'
+      },
+      'فرامهاجرت': {
+        instagram: 'https://instagram.com/faramohajerat',
+        telegram: 'https://t.me/faramohajerat',
+        website: 'https://faramohajerat.ir'
+      },
+      'خودجوش': {
+        instagram: 'https://instagram.com/khodjosh',
+        telegram: 'https://t.me/khodjosh',
+        website: 'https://khodjosh.ir'
+      }
+    };
+    return socials[brandName] || socials['فرامهاجرت'];
+  };
+
+  const socialLinks = getBrandSocialLinks(brand.name);
 
   return (
     <footer className="footer">
@@ -15,8 +37,8 @@ const Footer = () => {
           <h4>اطلاعات تماس</h4>
           <div className="contact-info">
             <p>📞 تلفن: {brand?.phone || '021-12345678'}</p>
-            <p>📧 ایمیل: {brand?.email || 'info@faramohajerat.ir'}</p>
-            <p>📍 آدرس: {brand?.address || 'تهران، خیابان ولیعصر'}</p>
+            <p>📧 ایمیل: {brand?.email || 'info@example.ir'}</p>
+            <p>📍 آدرس: {brand?.address || 'تهران'}</p>
           </div>
         </div>
 
@@ -45,12 +67,12 @@ const Footer = () => {
         {/* اطلاعات برند */}
         <div className="footer-section">
           <div className="brand-info">
-            <h3>{brand?.name || 'فرامهاجرت'}</h3>
-            <p>{brand?.description || 'مشاوره تخصصی مهاجرت'}</p>
+            <h3>{brand?.name || 'برند'}</h3>
+            <p>{brand?.description || 'توضیحات برند'}</p>
             <div className="social-links">
-              <a href="#" aria-label="Instagram">📱</a>
-              <a href="#" aria-label="Telegram">✈️</a>
-              <a href="#" aria-label="WhatsApp">💬</a>
+              <a href={socialLinks.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram">📱</a>
+              <a href={socialLinks.telegram} target="_blank" rel="noopener noreferrer" aria-label="Telegram">✈️</a>
+              <a href={socialLinks.website} target="_blank" rel="noopener noreferrer" aria-label="Website">🌐</a>
             </div>
           </div>
         </div>
@@ -59,7 +81,7 @@ const Footer = () => {
       {/* کپی رایت */}
       <div className="footer-bottom">
         <div className="container">
-          <p>&copy; {new Date().getFullYear()} {brand?.name || 'فرامهاجرت'} - تمام حقوق محفوظ است</p>
+          <p>&copy; {new Date().getFullYear()} {brand?.name || 'برند'} - تمام حقوق محفوظ است</p>
         </div>
       </div>
     </footer>

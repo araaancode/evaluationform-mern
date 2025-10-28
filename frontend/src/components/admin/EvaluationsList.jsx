@@ -1,4 +1,3 @@
-// src/components/admin/EvaluationsList.jsx
 import React, { useState } from 'react';
 import { format } from 'date-fns';
 import { faIR } from 'date-fns/locale';
@@ -8,13 +7,13 @@ const EvaluationsList = ({ evaluations, onRefresh }) => {
   const [filter, setFilter] = useState('all');
   const [searchTerm, setSearchTerm] = useState('');
 
-  const filteredEvaluations = evaluations.filter(eval => {
+  const filteredEvaluations = evaluations.filter(evaluation => {
     // فیلتر بر اساس وضعیت
-    if (filter !== 'all' && eval.status !== filter) return false;
+    if (filter !== 'all' && evaluation.status !== filter) return false;
     
     // جستجو در نام و نام خانوادگی
     if (searchTerm) {
-      const fullName = `${eval.personalInfo?.firstName} ${eval.personalInfo?.lastName}`;
+      const fullName = `${evaluation.personalInfo?.firstName} ${evaluation.personalInfo?.lastName}`;
       return fullName.toLowerCase().includes(searchTerm.toLowerCase());
     }
     

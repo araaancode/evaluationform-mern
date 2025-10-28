@@ -1,4 +1,3 @@
-// src/components/admin/Analytics.jsx
 import React from 'react';
 import './Analytics.css';
 
@@ -7,17 +6,22 @@ const Analytics = ({ evaluations }) => {
   const stats = {
     total: evaluations.length,
     byStatus: {
-      pending: evaluations.filter(e => e.status === 'pending').length,
-      under_review: evaluations.filter(e => e.status === 'under_review').length,
-      completed: evaluations.filter(e => e.status === 'completed').length
+      pending: evaluations.filter(evaluation => evaluation.status === 'pending').length,
+      under_review: evaluations.filter(evaluation => evaluation.status === 'under_review').length,
+      completed: evaluations.filter(evaluation => evaluation.status === 'completed').length
     },
-    byBrand: evaluations.reduce((acc, eval) => {
-      acc[eval.brand] = (acc[eval.brand] || 0) + 1;
+    byBrand: evaluations.reduce((acc, evaluation) => {
+      acc[evaluation.brand] = (acc[evaluation.brand] || 0) + 1;
       return acc;
     }, {}),
-    byDegree: evaluations.reduce((acc, eval) => {
-      const degree = eval.education?.degree || 'نامشخص';
+    byDegree: evaluations.reduce((acc, evaluation) => {
+      const degree = evaluation.education?.degree || 'نامشخص';
       acc[degree] = (acc[degree] || 0) + 1;
+      return acc;
+    }, {}),
+    byPurpose: evaluations.reduce((acc, evaluation) => {
+      const purpose = evaluation.immigration?.purpose || 'نامشخص';
+      acc[purpose] = (acc[purpose] || 0) + 1;
       return acc;
     }, {})
   };
@@ -90,6 +94,59 @@ const Analytics = ({ evaluations }) => {
             ))}
           </div>
         </div>
+
+        {/* نمودار توزیع بر اساس هدف مهاجرت */}
+        <div className="chart-card">
+          <h3>توزیع بر اساس هدف مهاجرت</h3>
+          <div className="chart">
+            {Object.entries(stats.byPurpose).map(([purpose, count]) => (
+              <div key={purpose} className="chart-item">
+                <div className="chart-label">{purpose}</div>
+                <div className="chart-bar">
+                  <div 
+                    className="chart-fill"
+                    style={{ 
+                      width: `${(count / stats.total) * 100}%`,
+                      backgroundColor: getPurposeColor(purpose)
+                    }}
+                  ></div>
+                </div>
+                <div className="chart-value">{count}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* خلاصه آماری */}
+        <div className="summary-card">
+          <h3>📈 خلاصه آماری</h3>
+          <div className="summary-stats">
+            <div className="summary-item">
+              <span>میانگین امتیاز:</span>
+              <strong>
+                {evaluations.filter(evaluation => evaluation.score).length > 0 
+                  ? (evaluations.reduce((sum, evaluation) => sum + (evaluation.score || 0), 0) / 
+                     evaluations.filter(evaluation => evaluation.score).length).toFixed(1)
+                  : '--'
+                }/100
+              </strong>
+            </div>
+            <div className="summary-item">
+              <span>نرخ تکمیل:</span>
+              <strong>{((stats.byStatus.completed / stats.total) * 100).toFixed(1)}%</strong>
+            </div>
+            <div className="summary-item">
+              <span>ارزیابی امروز:</span>
+              <strong>
+                {evaluations.filter(evaluation => {
+                  const today = new Date();
+                  const evalDate = new Date(evaluation.createdAt);
+                  return today.toDateString() === evalDate.toDateString();
+                }).length}
+              </strong>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
@@ -116,6 +173,18 @@ const getDegreeColor = (degree) => {
     'نامشخص': '#DDA0DD'
   };
   return colors[degree] || '#616161';
+};
+
+const getPurposeColor = (purpose) => {
+  const colors = {
+    'تحصیلی': '#4ECDC4',
+    'کاری': '#45B7D1', 
+    'سرمایه‌گذاری': '#FFEAA7',
+    'پناهندگی': '#FF6B6B',
+    'همراهی خانواده': '#96CEB4',
+    'نامشخص': '#DDA0DD'
+  };
+  return colors[purpose] || '#616161';
 };
 
 export default Analytics;

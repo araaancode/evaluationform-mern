@@ -1,4 +1,3 @@
-// src/contexts/EvaluationContext.js
 import React, { createContext, useState, useContext } from 'react';
 import { evaluationService } from '../services/evaluationService';
 import { AuthContext } from './AuthContext';
