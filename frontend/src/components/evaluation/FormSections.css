@@ -12,24 +12,135 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 1.5rem;
+  margin-bottom: 2rem;
 }
 
-.military-section {
-  margin-top: 2rem;
-  padding: 1.5rem;
+.form-group.full-width {
+  grid-column: 1 / -1;
+}
+
+/* استایل چک‌باکس‌های کشورها */
+.countries-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 6px;
+  transition: background-color 0.3s ease;
+}
+
+.checkbox-label:hover {
   background: var(--light-gray);
+}
+
+.checkbox-label.large {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.checkbox-input {
+  display: none;
+}
+
+.checkbox-custom {
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--medium-gray);
+  border-radius: 4px;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.checkbox-input:checked + .checkbox-custom {
+  background: var(--primary-red);
+  border-color: var(--primary-red);
+}
+
+.checkbox-input:checked + .checkbox-custom::after {
+  content: '✓';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+/* باکس اطلاعات */
+.info-box {
+  background: var(--light-gray);
+  padding: 1.5rem;
   border-radius: 8px;
   border-right: 4px solid var(--primary-red);
+  margin-top: 2rem;
 }
 
-.military-section h4 {
-  margin-bottom: 1rem;
+.info-box h4 {
   color: var(--primary-dark-red);
+  margin-bottom: 1rem;
 }
 
-/* Responsive */
+.levels-guide {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.level-item {
+  padding: 0.75rem;
+  background: var(--white);
+  border-radius: 6px;
+  border-left: 3px solid var(--primary-red);
+}
+
+/* پیام تکمیل */
+.completion-message {
+  margin-top: 2rem;
+}
+
+.success-box {
+  background: linear-gradient(135deg, #4CAF50, #45a049);
+  color: white;
+  padding: 2rem;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.success-box h4 {
+  margin-bottom: 1rem;
+  font-size: 1.3rem;
+}
+
+.success-box p {
+  line-height: 1.6;
+  margin: 0;
+  opacity: 0.9;
+}
+
+/* استایل‌های ریسپانسیو */
 @media (max-width: 768px) {
   .form-grid {
     grid-template-columns: 1fr;
+  }
+  
+  .countries-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .levels-guide {
+    font-size: 0.9rem;
+  }
+  
+  .success-box {
+    padding: 1.5rem;
   }
 }

@@ -1,9 +1,10 @@
-// src/App.jsx
+// src/App.jsx (آپدیت شده)
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './contexts/AuthContext';
 import { BrandProvider } from './contexts/BrandContext';
 import { EvaluationProvider } from './contexts/EvaluationContext';
+import { NotificationProvider } from './components/common/Notification';
 import Header from './components/common/Header';
 import Footer from './components/common/Footer';
 import Home from './pages/Home';
@@ -16,35 +17,37 @@ import './App.css';
 
 function App() {
   return (
-    <AuthProvider>
-      <BrandProvider>
-        <EvaluationProvider>
-          <Router>
-            <div className="app">
-              <Header />
-              <main className="main-content">
-                <Routes>
-                  <Route path="/" element={<Home />} />
-                  <Route path="/login" element={<Login />} />
-                  <Route path="/evaluation" element={<Evaluation />} />
-                  <Route path="/dashboard" element={
-                    <ProtectedRoute>
-                      <Dashboard />
-                    </ProtectedRoute>
-                  } />
-                  <Route path="/admin" element={
-                    <ProtectedRoute requireAdmin={true}>
-                      <AdminPanel />
-                    </ProtectedRoute>
-                  } />
-                </Routes>
-              </main>
-              <Footer />
-            </div>
-          </Router>
-        </EvaluationProvider>
-      </BrandProvider>
-    </AuthProvider>
+    <NotificationProvider>
+      <AuthProvider>
+        <BrandProvider>
+          <EvaluationProvider>
+            <Router>
+              <div className="app">
+                <Header />
+                <main className="main-content">
+                  <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/evaluation" element={<Evaluation />} />
+                    <Route path="/dashboard" element={
+                      <ProtectedRoute>
+                        <Dashboard />
+                      </ProtectedRoute>
+                    } />
+                    <Route path="/admin" element={
+                      <ProtectedRoute requireAdmin={true}>
+                        <AdminPanel />
+                      </ProtectedRoute>
+                    } />
+                  </Routes>
+                </main>
+                <Footer />
+              </div>
+            </Router>
+          </EvaluationProvider>
+        </BrandProvider>
+      </AuthProvider>
+    </NotificationProvider>
   );
 }
 
