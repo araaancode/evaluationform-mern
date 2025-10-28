@@ -1,0 +1,124 @@
+/* src/pages/AdminPanel.css */
+.admin-panel {
+  padding: 2rem 0;
+  background: var(--light-gray);
+  min-height: 100vh;
+}
+
+.admin-header {
+  background: var(--white);
+  padding: 2rem;
+  border-radius: 12px;
+  margin-bottom: 2rem;
+  box-shadow: var(--shadow);
+}
+
+.admin-title h1 {
+  color: var(--primary-dark-red);
+  margin-bottom: 0.5rem;
+}
+
+.admin-title p {
+  color: var(--text-light);
+  font-size: 1.1rem;
+}
+
+.admin-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.admin-stat {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.5rem;
+  background: var(--light-gray);
+  border-radius: 8px;
+  border-left: 4px solid var(--primary-red);
+}
+
+.stat-icon {
+  font-size: 2rem;
+}
+
+.stat-number {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: var(--primary-dark-red);
+  line-height: 1;
+}
+
+.stat-label {
+  color: var(--text-light);
+  font-size: 0.9rem;
+  margin-top: 0.25rem;
+}
+
+.admin-tabs {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.admin-tab {
+  background: var(--white);
+  border: 2px solid var(--medium-gray);
+  border-radius: 8px;
+  padding: 1.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+  font-family: inherit;
+}
+
+.admin-tab:hover {
+  border-color: var(--primary-red);
+  transform: translateY(-2px);
+}
+
+.admin-tab.active {
+  background: var(--primary-dark-red);
+  color: var(--white);
+  border-color: var(--primary-dark-red);
+}
+
+.tab-icon {
+  font-size: 2rem;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.tab-label {
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.admin-content {
+  background: var(--white);
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: var(--shadow);
+  min-height: 500px;
+}
+
+@media (max-width: 768px) {
+  .admin-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .admin-tabs {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .admin-tab {
+    padding: 1rem;
+  }
+  
+  .tab-icon {
+    font-size: 1.5rem;
+  }
+}
