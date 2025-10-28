@@ -1,18 +1,39 @@
 const express = require('express');
-const router = express.Router();
-const { 
-  getTemplates, 
-  updateTemplate, 
-  sendSMS, 
+const {
+  getTemplates,
+  getTemplate,
+  createTemplate,
+  updateTemplate,
+  deleteTemplate,
+  sendSMS,
+  sendBulkSMS,
   getSentMessages,
-  getSMSStats 
+  getSMSStats,
+  initializeTemplates
 } = require('../controllers/smsController');
 const { protect, admin } = require('../middleware/auth');
 
-router.get('/templates', protect, admin, getTemplates);
-router.put('/templates/:id', protect, admin, updateTemplate);
-router.post('/send', protect, admin, sendSMS);
-router.get('/history', protect, admin, getSentMessages);
-router.get('/stats', protect, admin, getSMSStats);
+const router = express.Router();
+
+// All routes are protected and admin only
+router.use(protect, admin);
+
+// Template management
+router.get('/templates', getTemplates);
+router.get('/templates/:id', getTemplate);
+router.post('/templates', createTemplate);
+router.put('/templates/:id', updateTemplate);
+router.delete('/templates/:id', deleteTemplate);
+
+// SMS sending
+router.post('/send', sendSMS);
+router.post('/send-bulk', sendBulkSMS);
+
+// History and stats
+router.get('/history', getSentMessages);
+router.get('/stats', getSMSStats);
+
+// Initialization
+router.post('/initialize-templates', initializeTemplates);
 
 module.exports = router;
